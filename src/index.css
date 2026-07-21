@@ -1,0 +1,592 @@
+@import "tailwindcss";
+
+/* ── Fonts ── */
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url('./assets/fonts/Gilroy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy-Medium';
+  src: url('./assets/fonts/Gilroy-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy-SemiBold';
+  src: url('./assets/fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('./assets/fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gilroy-RegularItalic';
+  src: url('./assets/fonts/Gilroy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'TT Norms Pro';
+  src: url('./assets/fonts/TTNormsPro-Bold.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Design System Tokens ── */
+:root {
+  /* Color Primitives */
+  --color-purple-500: #4E2FD2;
+  --color-blue-050: #EDF4FF;
+  --color-blue-600: #0046C7;
+  --color-blue-700: #E7EFFD;
+  --color-gray-000: #FFFFFF;
+  --color-gray-100: #F1F1F2;
+  --color-gray-200: #F0F4F7;
+  --color-gray-300: #E6EBF0;
+  --color-gray-400: #CED6DE;
+  --color-gray-500: #A8B2BD;
+  --color-gray-600: #6F7882;
+  --color-gray-700: #525963;
+  --color-gray-750: #575757;
+  --color-gray-800: #484848;
+  --color-gray-900: #1F1F1F;
+  --color-gray-950: #0B0D10;
+  --color-green-500: #0AA288;
+  --color-red-500: #D8392B;
+  --color-black: #000000;
+
+  /* Font Family Primitives */
+  --font-gilroy-regular: 'Gilroy-Regular', sans-serif;
+  --font-gilroy-regular-italic: 'Gilroy-RegularItalic', sans-serif;
+  --font-gilroy-medium: 'Gilroy-Medium', sans-serif;
+  --font-gilroy-semibold: 'Gilroy-SemiBold', sans-serif;
+  --font-gilroy-bold: 'Gilroy-Bold', sans-serif;
+  --font-tt-norms: 'TT Norms Pro', sans-serif;
+
+  /* Font Size Primitives */
+  --font-size-10: 0.625rem;
+  --font-size-12: 0.75rem;
+  --font-size-14: 0.875rem;
+  --font-size-16: 1rem;
+  --font-size-17: 1.0625rem;
+  --font-size-18: 1.125rem;
+  --font-size-22: 1.375rem;
+  --font-size-24: 1.5rem;
+
+  /* Line Height Primitives */
+  --line-height-100: 1;
+  --line-height-114: 1.14;
+  --line-height-120: 1.2;
+  --line-height-125: 1.25;
+  --line-height-130: 1.3;
+  --line-height-133: 1.33;
+
+  /* Letter Spacing Primitives */
+  --letter-spacing-tight: -0.00125em;
+  --letter-spacing-none: 0em;
+  --letter-spacing-xs: 0.005em;
+  --letter-spacing-md: 1.6px;
+  --letter-spacing-caps: 1.6px;
+
+  /* Border Radius Primitives */
+  --radius-2: 0.125rem;
+  --radius-3: 0.1875rem;
+  --radius-4: 0.25rem;
+  --radius-5: 0.3125rem;
+  --radius-7: 0.4375rem;
+  --radius-10: 0.625rem;
+  --radius-pill: 9999px;
+
+  /* Border Width Primitives */
+  --border-width-sm: 1px;
+  --border-width-md: 2px;
+
+  /* Spacing Primitives */
+  --space-2: 0.125rem;
+  --space-3: 0.1875rem;
+  --space-4: 0.25rem;
+  --space-5: 0.3125rem;
+  --space-6: 0.375rem;
+  --space-8: 0.5rem;
+  --space-10: 0.625rem;
+  --space-11: 0.6875rem;
+  --space-12: 0.75rem;
+  --space-13: 0.8125rem;
+  --space-15: 0.9375rem;
+  --space-16: 1rem;
+  --space-18: 1.8125rem;
+  --space-19: 1.1875rem;
+  --space-20: 1.25rem;
+  --space-24: 1.5rem;
+  --space-46: 2.875rem;
+
+  /* Shadow Primitives */
+  --purple-border-selected: rgba(78, 47, 210, 0.7);
+
+  /* ── Semantic: Brand ── */
+  --color-brand-primary: var(--color-purple-500);
+  --color-brand-primary-hover: var(--color-blue-600);
+
+  /* ── Semantic: Surface ── */
+  --color-surface-card: var(--color-gray-000);
+  --color-surface-subtle: var(--color-blue-050);
+
+  /* ── Semantic: Text ── */
+  --color-text-primary: var(--color-gray-950);
+  --color-text-heading: var(--color-gray-900);
+  --color-text-muted: var(--color-gray-600);
+  --color-text-placeholder: var(--color-gray-500);
+  --color-text-on-brand: var(--color-gray-000);
+  --color-text-brand: var(--color-brand-primary);
+  --color-text-price-current: var(--color-brand-primary);
+  --color-text-price-strike-alt: var(--color-gray-600);
+  --color-text-success: var(--color-green-500);
+  --color-text-link-muted: var(--color-gray-800);
+
+  /* ── Semantic: Border ── */
+  --color-border-divider: var(--color-gray-900);
+  --color-border-card: var(--color-gray-300);
+  --color-border-selected: var(--purple-border-selected);
+  --color-border-brand: var(--color-brand-primary);
+  --color-border-success: var(--color-green-500);
+
+  /* ── Semantic: Icon ── */
+  --color-stepper-bg-active: var(--color-gray-000);
+  --color-stepper-bg-disabled: var(--color-gray-100);
+  --color-stepper-border-disabled: var(--color-gray-400);
+
+  /* ── Semantic: Typography — Font Family ── */
+  --font-family-body: var(--font-gilroy-medium);
+  --font-family-heading: var(--font-gilroy-semibold);
+  --font-family-label: var(--font-gilroy-regular);
+  --font-family-label-caps: var(--font-gilroy-regular);
+  --font-family-cta: var(--font-tt-norms);
+  --font-family-display: var(--font-gilroy-bold);
+  --font-family-italic: var(--font-gilroy-regular-italic);
+
+  /* ── Semantic: Typography — Labels ── */
+  --typography-label-caps-size: var(--font-size-12);
+  --typography-label-caps-family: var(--font-family-label-caps);
+  --typography-label-caps-line-height: var(--line-height-133);
+  --typography-label-caps-letter-spacing: var(--letter-spacing-caps);
+
+  --typography-step-label-size: var(--font-size-12);
+  --typography-step-label-family: var(--font-family-body);
+  --typography-step-label-line-height: var(--line-height-100);
+  --typography-step-label-letter-spacing: var(--letter-spacing-md);
+
+  --typography-body-sm-size: var(--font-size-12);
+
+  /* ── Semantic: Typography — UI / Interactive ── */
+  --typography-ui-counter-size: var(--font-size-16);
+  --typography-ui-counter-family: var(--font-family-body);
+  --typography-ui-counter-line-height: var(--line-height-125);
+
+  --typography-cta-size: var(--font-size-17);
+  --typography-cta-family: var(--font-family-cta);
+  --typography-cta-line-height: var(--line-height-133);
+  --typography-cta-letter-spacing: var(--letter-spacing-none);
+
+  --typography-cta-outline-size: var(--font-size-18);
+  --typography-cta-outline-family: var(--font-family-heading);
+  --typography-cta-outline-line-height: var(--line-height-133);
+  --typography-cta-outline-letter-spacing: var(--letter-spacing-none);
+
+  /* ── Semantic: Typography — Price ── */
+  --typography-price-inline-line-height: var(--line-height-114);
+
+  --typography-price-card-size: var(--font-size-16);
+  --typography-price-card-family: var(--font-family-label);
+  --typography-price-card-line-height: var(--line-height-100);
+  --typography-price-card-letter-spacing: 0.6px;
+
+  /* ── Semantic: Typography — Badge / Tag ── */
+  --typography-badge-size: var(--font-size-12);
+  --typography-badge-family: var(--font-family-heading);
+  --typography-badge-line-height: var(--line-height-125);
+  --typography-badge-letter-spacing: var(--letter-spacing-none);
+
+  /* ── Semantic: Typography — Italic / Link ── */
+  --typography-link-italic-size: var(--font-size-12);
+
+  /* ── Semantic: Spacing ── */
+  --spacing-component-sm: var(--space-4);
+
+  --spacing-inset-sm: var(--space-11);
+  --spacing-inset-md: var(--space-15);
+  --spacing-inset-xl: var(--space-24);
+
+  --spacing-button-v: var(--space-13);
+  --spacing-button-h: var(--space-16);
+  --spacing-button-v-sm: var(--space-5);
+
+  /* ── Semantic: Border Radius ── */
+  --radius-badge: var(--radius-2);
+  --radius-button-sm: var(--radius-3);
+  --radius-stepper-btn: var(--radius-4);
+  --radius-button: var(--radius-4);
+  --radius-button-outline: var(--radius-7);
+  --radius-card: var(--radius-10);
+  --radius-panel: var(--radius-10);
+  --radius-tag: var(--radius-pill);
+}
+
+@theme {
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-primary-hover: var(--color-brand-primary-hover);
+  --color-surface-subtle: var(--color-surface-subtle);
+  --color-surface-card: var(--color-surface-card);
+  --color-border-card: var(--color-border-card);
+  --color-border-divider: var(--color-border-divider);
+  --color-border-selected: var(--color-border-selected);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-heading: var(--color-text-heading);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-success: var(--color-text-success);
+  --color-text-brand: var(--color-text-brand);
+  --color-gray-100: var(--color-gray-100);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-800: var(--color-gray-800);
+
+  --font-size-10: var(--font-size-10);
+  --font-size-12: var(--font-size-12);
+  --font-size-14: var(--font-size-14);
+  --font-size-16: var(--font-size-16);
+  --font-size-17: var(--font-size-17);
+  --font-size-18: var(--font-size-18);
+  --font-size-22: var(--font-size-22);
+  --font-size-24: var(--font-size-24);
+
+  --radius-badge: var(--radius-badge);
+  --radius-button: var(--radius-button);
+  --radius-button-sm: var(--radius-button-sm);
+  --radius-stepper-btn: var(--radius-stepper-btn);
+  --radius-button-outline: var(--radius-button-outline);
+  --radius-card: var(--radius-card);
+  --radius-panel: var(--radius-panel);
+  --radius-tag: var(--radius-tag);
+}
+
+/* ── Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--color-surface-card);
+  border: var(--border-width-sm) solid var(--color-border-card);
+  border-radius: var(--radius-card);
+  padding: 0 var(--spacing-inset-sm);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-10);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.card-selected {
+  border-color: var(--color-border-selected);
+  box-shadow: 0 0 0 1px var(--color-border-selected);
+}
+
+/* ── Badge ── */
+.badge-discount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2) var(--space-6);
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+  font-size: var(--typography-badge-size);
+  font-family: var(--typography-badge-family);
+  line-height: var(--typography-badge-line-height);
+  letter-spacing: var(--typography-badge-letter-spacing);
+  border-radius: var(--radius-tag);
+  white-space: nowrap;
+}
+
+/* ── Variant chip ── */
+.variant-chip {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-component-sm);
+  padding: var(--spacing-component-sm) var(--space-8);
+  border: var(--border-width-sm) solid var(--color-border-card);
+  border-radius: var(--radius-badge);
+  cursor: pointer;
+  font-size: var(--typography-body-sm-size);
+  font-family: var(--font-family-body);
+  color: var(--color-text-heading);
+  background: var(--color-surface-card);
+  transition: border-color 0.15s;
+  white-space: nowrap;
+  line-height: var(--line-height-125);
+}
+
+.variant-chip:hover {
+  border-color: var(--color-border-divider);
+}
+
+.variant-chip.active {
+  border-color: var(--color-border-success);
+  background: rgba(29, 240, 187, 0.04);
+}
+
+/* ── Swatch dot ── */
+.swatch {
+  width: var(--font-size-14);
+  height: var(--font-size-14);
+  border-radius: 50%;
+  border: var(--border-width-sm) solid rgba(0, 0, 0, 0.18);
+  flex-shrink: 0;
+}
+
+/* ── Quantity stepper ── */
+.stepper-btn {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-stepper-btn);
+  border: var(--border-width-md) solid var(--color-gray-300);
+  background: var(--color-stepper-bg-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--typography-ui-counter-size);
+  line-height: var(--line-height-100);
+  color: var(--color-text-heading);
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.stepper-btn:hover:not(:disabled) {
+  background: var(--color-gray-100);
+}
+
+.stepper-btn.stepper-btn-add {
+  border: none;
+  background: var(--color-gray-200);
+}
+
+.stepper-btn.stepper-btn-add:hover:not(:disabled) {
+  background: var(--color-gray-300);
+}
+
+.stepper-btn:disabled {
+  background: var(--color-stepper-bg-disabled);
+  border-color: var(--color-stepper-border-disabled);
+  color: var(--color-text-placeholder);
+  cursor: not-allowed;
+}
+
+.stepper-count {
+  font-size: var(--typography-ui-counter-size);
+  font-family: var(--typography-ui-counter-family);
+  line-height: var(--typography-ui-counter-line-height);
+  min-width: 1.25rem;
+  text-align: center;
+  color: var(--color-text-primary);
+}
+
+/* ── Step accordion header ── */
+.step-header {
+  padding: var(--spacing-inset-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.step-header-label {
+  display: flex;
+  gap: var(--space-12);
+  cursor: pointer;
+  user-select: none;
+}
+
+.step-icon {
+  width: 1.725rem;
+  height: 1.725rem;
+}
+
+.step-title {
+  font-size: 1.375rem;
+}
+
+/* ── Labels ── */
+.step-label {
+  font-size: var(--typography-step-label-size);
+  font-family: var(--typography-step-label-family);
+  letter-spacing: var(--typography-step-label-letter-spacing);
+  line-height: var(--typography-step-label-line-height);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.label-caps {
+  font-size: var(--typography-label-caps-size);
+  font-family: var(--typography-label-caps-family);
+  letter-spacing: var(--typography-label-caps-letter-spacing);
+  line-height: var(--typography-label-caps-line-height);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Buttons ── */
+.btn-checkout {
+  width: 100%;
+  padding: var(--spacing-button-v) var(--spacing-button-h);
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+  font-size: var(--typography-cta-size);
+  font-family: var(--typography-cta-family);
+  line-height: var(--typography-cta-line-height);
+  letter-spacing: var(--typography-cta-letter-spacing);
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-checkout:hover {
+  background: var(--color-brand-primary-hover);
+}
+
+.btn-next {
+  padding: var(--spacing-button-v-sm) var(--spacing-inset-xl);
+  background: transparent;
+  color: var(--color-text-brand);
+  font-size: var(--typography-cta-outline-size);
+  font-family: var(--typography-cta-outline-family);
+  line-height: var(--typography-cta-outline-line-height);
+  letter-spacing: var(--typography-cta-outline-letter-spacing);
+  border: var(--border-width-md) solid var(--color-border-brand);
+  border-radius: var(--radius-button-outline);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-next:hover {
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+}
+
+/* ── Prices ── */
+.price-current {
+  color: var(--color-text-price-current);
+  font-size: var(--typography-price-card-size);
+  font-family: var(--typography-price-card-family);
+  line-height: var(--typography-price-card-line-height);
+  letter-spacing: var(--typography-price-card-letter-spacing);
+}
+
+.price-original {
+  color: var(--color-text-price-strike-alt);
+  text-decoration: line-through;
+  font-size: var(--typography-price-card-size);
+  font-family: var(--typography-price-card-family);
+  line-height: var(--typography-price-inline-line-height);
+}
+
+.step-cameras .price-original {
+  color: var(--color-red-500);
+}
+
+.step-cameras .price-current {
+  color: #575757;
+}
+
+.step-sensors .price-free {
+  color: var(--color-brand-primary);
+}
+
+.price-free {
+  color: var(--color-text-brand);
+  font-family: var(--font-family-heading);
+  font-size: var(--typography-price-card-size);
+}
+
+/* Review section: line-item & shipping prices */
+.review-panel .price-current,
+.review-panel .price-original,
+.review-panel .price-free,
+.review-panel .shipping-free-badge {
+  font-size: 0.8125rem;
+}
+
+.review-panel .shipping-free-badge {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+
+  .review-panel .price-current,
+  .review-panel .price-original,
+  .review-panel .price-free,
+  .review-panel .shipping-free-badge {
+    font-size: 0.75rem;
+  }
+}
+
+/* ── Review section label ── */
+.review-section-label {
+  font-size: var(--typography-label-caps-size);
+  font-family: var(--typography-label-caps-family);
+  letter-spacing: 0.5%;
+  line-height: 1rem;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding-bottom: var(--space-6);
+}
+
+/* ── Links ── */
+.link-muted {
+  color: var(--color-text-link-muted);
+  font-size: var(--typography-link-italic-size);
+  text-decoration: underline;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: var(--font-family-body);
+}
+
+.link-muted:hover {
+  color: var(--color-text-heading);
+}
+
+.link-brand {
+  color: var(--color-brand-primary-hover);
+  font-size: var(--typography-link-italic-size);
+  text-decoration: underline;
+  cursor: pointer;
+}
