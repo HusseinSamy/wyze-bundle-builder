@@ -36,18 +36,12 @@ export function ProductCard({ product }: Props) {
       {/* Product image — variant-aware, badge overlaid top-left */}
       <div className="relative flex-shrink-0">
         {product.badge && (
-          <span className="badge-discount absolute top-0 left-0">{product.badge}</span>
+          <span className="badge-discount font-badge absolute top-0 left-0">{product.badge}</span>
         )}
         <img
           src={displayImage}
           alt={product.name}
-          style={{
-            width: '6.3125rem',
-            height: '8.5625rem',
-            objectFit: 'contain',
-            borderRadius: '0.3125rem',
-            background: '#FFFFFF',
-          }}
+          className="w-[6.3125rem] h-[8.5625rem] object-contain rounded-[0.3125rem] bg-gray-000"
         />
       </div>
 
@@ -55,12 +49,12 @@ export function ProductCard({ product }: Props) {
       <div className="flex flex-col gap-2 min-w-0 flex-1">
         {/* Text */}
         <div className="flex flex-col gap-1 min-w-0 flex-1">
-          <h3 className="font-semibold text-sm leading-snug text-gray-900 m-0" style={{ fontSize: '1rem', fontWeight: 500, letterSpacing: '0.6px', lineHeight: '16px' }}>
+          <h3 className="font-product-name text-gray-900 m-0">
             {product.name}
           </h3>
-          <p className="text-xs leading-tight" style={{ color: 'rgba(31,31,31,0.75)', letterSpacing: "0.6px" }}>
+          <p className="pt-2 font-description text-secondary-text">
             {product.description}{' '}
-            <a href="#" className="link-brand text-xs" onClick={e => e.preventDefault()}>
+            <a href="#" className="font-body text-xs text-blue-700 underline cursor-pointer" onClick={e => e.preventDefault()}>
               Learn More
             </a>
           </p>
@@ -77,12 +71,17 @@ export function ProductCard({ product }: Props) {
 
         {/* Stepper + price */}
         <div className="flex ps-1 items-center justify-between mt-auto">
-          <QuantityStepper value={qty} onChange={handleQtyChange} />
-          <div className="flex flex-col items-end gap-0.5">
+          <QuantityStepper
+            value={qty}
+            onChange={handleQtyChange}
+            min={product.required ? 1 : 0}
+            max={product.required ? 1 : 99}
+          />
+          <div className="flex flex-col items-end">
             {product.comparePrice !== undefined && (
-              <span className="pt-1 price-original">{fmt(product.comparePrice, product.isMonthly)}</span>
+              <span className="price-original font-price-strike text-base">{fmt(product.comparePrice, product.isMonthly)}</span>
             )}
-            <span className={product.price === 0 ? 'price-free text-sm font-semibold' : 'price-current'}>
+            <span className={`${product.price === 0 ? 'font-price-free text-brand' : 'price-current font-price-current'} text-base -mt-1.5`}>
               {fmt(product.price, product.isMonthly)}
             </span>
           </div>

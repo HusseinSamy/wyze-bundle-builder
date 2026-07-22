@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Skill(run)",
-      "Skill(run:*)"
+      "Skill(run:*)",
+      "Bash(cd /Users/husseinshatla/Work/wyze-bundle-builder *)"
+    ],
+    "additionalDirectories": [
+      "/Users/husseinshatla/Work/wyze-bundle-builder/src"
     ]
   }
 }

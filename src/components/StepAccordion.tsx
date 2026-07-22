@@ -1,12 +1,12 @@
 import { type ReactNode } from 'react';
 import { useBundle } from '../context/BundleContext';
-import { ChevronDown, ChevronUp } from './StepIcons';
+import { CameraIcon, ChevronDown, ExtraProtectionIcon, PlanIcon, SensorsIcon } from './StepIcons';
 
-const STEP_ICON_SRCS: Record<number, string | null> = {
-  1: '/icons/camera-icon.svg',
-  2: '/icons/plan-icon.svg',
-  3: '/icons/sensors-icon.svg',
-  4: '/icons/extra-protection-icon.svg',
+const STEP_ICONS: Record<number, typeof CameraIcon | null> = {
+  1: CameraIcon,
+  2: PlanIcon,
+  3: SensorsIcon,
+  4: ExtraProtectionIcon,
 };
 
 interface Props {
@@ -17,25 +17,24 @@ interface Props {
   className?: string;
 }
 
-export function StepAccordion({ stepId, label, nextLabel, children, className }: Props) {
-  const { state, goToStep, completeStep, getTotalQtyForStep } = useBundle();
+export function StepAccordion({ stepId, label, nextLabel, children }: Props) {
+  const { state, goToStep, getTotalQtyForStep } = useBundle();
   const { activeStep } = state;
 
   const isActive = activeStep === stepId;
   const selectedCount = getTotalQtyForStep(stepId);
 
-  const iconSrc = STEP_ICON_SRCS[stepId];
+  const StepIcon = STEP_ICONS[stepId];
 
   function handleHeaderClick() {
-    // Only step 1 can collapse to a fully-closed state; it starts open on first visit.
-    goToStep(stepId === 1 && isActive ? 0 : stepId);
+    goToStep(isActive ? 0 : stepId);
   }
 
   return (
-    <div className={`step-accordion ${isActive ? 'active' : 'inactive'} ${className ?? ''}`}>
+    <div className={`step-accordion step-cameras ${isActive ? 'active' : 'inactive'}`}>
       {/* Step label  */}
-      <div className="px-[15px] pt-[15px] pb-1 step-header-label border-b border-gray-900 flex flex-col gap-0.5 flex-1 min-w-0">
-        <span className="step-label">Step {stepId} of 4</span>
+      <div className="px-3.75 pb-1 step-header-label border-b border-gray-900 flex flex-col gap-0.5 flex-1 min-w-0">
+        <span className="font-step-label text-muted-text max-md:text-[0.625rem]">Step {stepId} of 4</span>
       </div>
       {/* Header */}
       <div
@@ -48,61 +47,45 @@ export function StepAccordion({ stepId, label, nextLabel, children, className }:
       >
         <div className="flex items-center gap-2 pt-1">
           {/* Icon */}
-          <img
-            src={iconSrc ?? undefined}
-            alt=""
-            aria-hidden="true"
-            className="step-icon"
-            style={{ objectFit: 'contain' }}
-          />
+          {StepIcon && <StepIcon size={20} className="step-icon" />}
 
 
           {/* Label */}
-          <span
-            className="step-title"
-            style={{
-              fontWeight: 600,
-              color: '#1F1F1F',
-              lineHeight: 1.2,
-            }}
-          >
+          <span className="font-step-title text-gray-900 max-md:text-[1.125rem]">
             {label}
           </span>
         </div>
 
         {/* State indicator */}
-        <div
-          className="flex items-center gap-1 flex-shrink-0"
-          style={{ color: '#4E2FD2', fontSize: '0.8125rem', fontWeight: 400, fontFamily: 'Gilroy-Medium' }}
-        >
+        <div className="font-body flex items-center gap-1 flex-shrink-0 text-brand text-[0.8125rem]">
           {selectedCount > 0 && (
             <span>{selectedCount} selected</span>
           )}
-          <span style={{ color: '#6F7882' }}>
-            {isActive ? <ChevronUp size={12} /> : <ChevronDown size={12} />}
+          <span className={`text-gray-600 inline-flex transition-transform duration-300 ease-in-out ${isActive ? 'rotate-180' : ''}`}>
+            <ChevronDown size={12} />
           </span>
         </div>
       </div>
 
       {/* Body */}
-      {
-        isActive && (
-          <div className="mx-[15px] flex flex-col gap-4">
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isActive ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+        <div className="overflow-hidden">
+          <div className="mx-3.75 flex flex-col gap-4">
             {children}
 
             {nextLabel && (
-              <div className="flex my-[15px] justify-center pt-2">
+              <div className="flex my-3.75 justify-center pt-2">
                 <button
-                  className="btn-next"
-                  onClick={() => completeStep(stepId)}
+                  className="btn-next font-cta-outline"
+                  onClick={() => goToStep(Math.min(stepId + 1, 4))}
                 >
                   Next: {nextLabel}
                 </button>
               </div>
             )}
           </div>
-        )
-      }
+        </div>
+      </div>
     </div >
   );
 }
