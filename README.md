@@ -2,7 +2,7 @@
 
 ## Quick walkthrough for the submission 😁
 
-<img src="src/assets/thumnail.jpg" width="400px" alt="video thumbnail"> 
+<img src="src/assets/thumbnail.jpg" width="400px" alt="video thumbnail"> 
 
 [Watch the video](https://www.youtube.com/watch?v=vXk0QIlRurA)
 
