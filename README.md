@@ -92,4 +92,4 @@ Derived data is computed from context, not stored:
 - `useOrderTotals()` reduces `useReviewItems()` into `{ totalSale, totalCompare, savings }`, including shipping logic.
 
 ### Diagram:
-<img src="assets/data-flow-diagram.svg" width="100%" alt="data-flow-diagram">
+<img src="src/assets/data-flow-diagram.png" width="100%" alt="data-flow-diagram">
