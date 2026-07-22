@@ -160,8 +160,15 @@ export function useOrderTotals() {
   }
 
   const savings = totalCompare - totalSale;
-  const shipping = totalSale > 0 ? 0 : 5.99;
+  const FREE_SHIPPING_THRESHOLD = 100;
   const shippingCompare = 5.99;
+  const shipping = totalSale >= FREE_SHIPPING_THRESHOLD ? 0 : shippingCompare;
 
-  return { totalSale: totalSale + shipping, totalCompare: totalCompare + shippingCompare, savings: savings + shippingCompare - shipping };
+  return {
+    totalSale: totalSale + shipping,
+    totalCompare: totalCompare + shippingCompare,
+    savings: savings + shippingCompare - shipping,
+    shipping,
+    shippingCompare,
+  };
 }

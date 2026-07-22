@@ -12,7 +12,7 @@ const SECTIONS: { label: string; category: StepCategory }[] = [
 
 export function ReviewPanel() {
   const items = useReviewItems();
-  const { totalSale, totalCompare, savings } = useOrderTotals();
+  const { totalSale, totalCompare, savings, shipping, shippingCompare } = useOrderTotals();
   console.log(items)
   const { saveSystem } = useBundle();
 
@@ -38,7 +38,7 @@ export function ReviewPanel() {
       {/* Line items by section */}
       {
         hasItems ? (
-          <div className="flex flex-col gap-4 ps-5 pe-5 md:pe-7.5">
+          <div className="flex flex-col gap-4 ps-5 pe-5 pt-1 md:pt-0 md:pe-7.5">
             {SECTIONS.map(({ label, category }) => {
               const sectionItems = items.filter(i => i.product.category === category);
               if (!sectionItems.length) return null;
@@ -76,8 +76,14 @@ export function ReviewPanel() {
           <span className="font-ui-label text-gray-900">Fast Shipping</span>
         </div>
         <div className="flex flex-col items-end">
-          <span className="price-original font-price-strike text-[0.75rem] md:text-[0.8125rem]">$5.99</span>
-          <span className="shipping-free-badge font-price-total text-brand text-[0.75rem] md:text-sm">FREE</span>
+          {shipping === 0 ? (
+            <>
+              <span className="price-original font-price-strike text-[0.75rem] md:text-[0.8125rem]">${shippingCompare.toFixed(2)}</span>
+              <span className="shipping-free-badge font-price-total text-brand text-[0.75rem] md:text-sm">FREE</span>
+            </>
+          ) : (
+            <span className="font-price-total text-brand text-[0.75rem] md:text-sm">${shipping.toFixed(2)}</span>
+          )}
         </div>
       </div>
 
