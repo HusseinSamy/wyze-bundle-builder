@@ -1,5 +1,12 @@
 # Wyze Bundle Builder — Documentation (Test ID 43102)
 
+## Quick walkthrough for the submission 😁
+
+<img src="src/assets/thumnail.jpg" width="400px" alt="video thumbnail"> 
+
+[Watch the video](https://www.youtube.com/watch?v=vXk0QIlRurA)
+
+
 ## 1. Running locally
 
 Requirements: Node 18+ (tested on Node 26), npm.
