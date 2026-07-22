@@ -3,6 +3,7 @@ import { StepAccordion } from './components/StepAccordion';
 import { ProductCard } from './components/ProductCard';
 import { PlanCard } from './components/PlanCard';
 import { ReviewPanel } from './components/ReviewPanel';
+import { WelcomeVideoPopup } from './components/WelcomeVideoPopup';
 import { PRODUCTS } from './data/products';
 import { STEPS } from './data/steps';
 
@@ -69,6 +70,7 @@ export default function App() {
   return (
     <BundleProvider>
       <Builder />
+      <WelcomeVideoPopup />
     </BundleProvider>
   );
 }
