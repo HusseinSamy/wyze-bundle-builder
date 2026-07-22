@@ -34,40 +34,28 @@ export function ReviewLineItem({ product, variantId, qty, linePrice, lineCompare
         <img
           src={thumbnail}
           alt={product.name}
-          style={
+          className={
             isPlan
-              ? { width: '1.5rem', height: '1.5rem', objectFit: 'contain', flexShrink: 0 }
-              : {
-                  width: '2.5rem',
-                  height: '2.5rem',
-                  objectFit: 'contain',
-                  flexShrink: 0,
-                  borderRadius: '0.3125rem',
-                  background: '#FFFFFF',
-                }
+              ? 'w-6 h-6 object-contain shrink-0'
+              : 'w-10 h-10 object-contain shrink-0 rounded-[0.3125rem] bg-gray-000'
           }
         />
 
         {/* Name */}
         <div className="flex-1 min-w-0">
           <p
-            className={`leading-tight m-0 text-[0.75rem] ${isPlan ? 'md:text-[1rem]' : 'md:text-[0.875rem]'}`}
-            style={{
-              letterSpacing: isPlan ? "-0.2%" : "0.5%",
-              fontWeight: isPlan ? 700 : 500,
-              color: isPlan ? undefined : '#1F1F1F',
-            }}
+            className={`${isPlan ? 'font-line-item-strong' : 'font-line-item text-gray-900'} m-0 text-[0.75rem] ${isPlan ? 'md:text-[1rem]' : 'md:text-[0.875rem]'}`}
           >
             {isPlan ? (
               <>
-                <span style={{ color: '#1F1F1F' }}>{product.name.split(' ')[0]}</span>{' '}
-                <span style={{ color: '#4E2FD2' }}>{product.name.split(' ').slice(1).join(' ')}</span>
+                <span className="text-gray-900">{product.name.split(' ')[0]}</span>{' '}
+                <span className="text-brand">{product.name.split(' ').slice(1).join(' ')}</span>
               </>
             ) : (
               product.name
             )}
             {product.required && (
-              <span className="ml-1 " style={{ color: '#6F7882' }}> (Required)</span>
+              <span className="ml-1 text-gray-600"> (Required)</span>
             )}
           </p>
         </div>
@@ -79,20 +67,21 @@ export function ReviewLineItem({ product, variantId, qty, linePrice, lineCompare
           value={qty}
           onChange={handleQty}
           min={product.required ? 1 : 0}
+          max={product.required ? 1 : 99}
           size="md"
+          uniformButtons
         />
       )}
 
       {/* Price */}
-      <div className="flex flex-col items-end gap-0.5 flex-shrink-0" style={{ minWidth: '3.5rem' }}>
+      <div className="flex flex-col items-end gap-0.5 flex-shrink-0 min-w-14">
         {lineCompare !== undefined && lineCompare > linePrice && (
-          <span className="price-original" style={{ fontWeight: 600 }}>
+          <span className="price-original font-price-strike font-semibold text-[0.75rem] md:text-[0.8125rem]">
             {fmt(lineCompare, product.isMonthly)}
           </span>
         )}
         <span
-          className={product.price === 0 ? 'price-free' : 'price-current'}
-          style={{ fontWeight: 600 }}
+          className={`${product.price === 0 ? 'font-price-free text-brand' : 'price-current font-price-current'} font-semibold text-[0.75rem] md:text-[0.8125rem]`}
         >
           {fmt(linePrice, product.isMonthly)}
         </span>

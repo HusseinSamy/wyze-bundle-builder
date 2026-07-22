@@ -12,12 +12,21 @@ interface BundleState {
   activeStep: number;
 }
 
+interface BundleCtx {
+  state: BundleState;
+  setQty: (productId: string, variantId: string, qty: number) => void;
+  setVariant: (productId: string, variantId: string) => void;
+  goToStep: (step: number) => void;
+  saveSystem: () => void;
+  getTotalQtyForStep: (stepIndex: number) => number;
+  getQty: (productId: string, variantId: string) => number;
+  getActiveVariant: (productId: string) => string;
+}
+
 type Action =
-  | { type: 'SET_QTY'; productId: string; variantId: string; qty: number }
+  { type: 'SET_QTY'; productId: string; variantId: string; qty: number }
   | { type: 'SET_VARIANT'; productId: string; variantId: string }
-  | { type: 'GO_TO_STEP'; step: number }
-  | { type: 'COMPLETE_STEP'; step: number }
-  | { type: 'LOAD'; state: BundleState };
+  | { type: 'GO_TO_STEP'; step: number };
 
 const STORAGE_KEY = 'wyze-bundle-v1';
 
@@ -52,28 +61,9 @@ function reducer(state: BundleState, action: Action): BundleState {
       return { ...state, activeVariants: { ...state.activeVariants, [action.productId]: action.variantId } };
     case 'GO_TO_STEP':
       return { ...state, activeStep: action.step };
-    case 'COMPLETE_STEP': {
-      const next = action.step + 1;
-      return { ...state, activeStep: Math.min(next, 4) };
-    }
-    case 'LOAD':
-      return action.state;
     default:
       return state;
   }
-}
-
-interface BundleCtx {
-  state: BundleState;
-  setQty: (productId: string, variantId: string, qty: number) => void;
-  setVariant: (productId: string, variantId: string) => void;
-  goToStep: (step: number) => void;
-  completeStep: (step: number) => void;
-  saveSystem: () => void;
-  getProduct: (id: string) => Product | undefined;
-  getTotalQtyForStep: (stepIndex: number) => number;
-  getQty: (productId: string, variantId: string) => number;
-  getActiveVariant: (productId: string) => string;
 }
 
 const Ctx = createContext<BundleCtx>(null!);
@@ -95,15 +85,9 @@ export function BundleProvider({ children }: { children: ReactNode }) {
   function goToStep(step: number) {
     dispatch({ type: 'GO_TO_STEP', step });
   }
-  function completeStep(step: number) {
-    dispatch({ type: 'COMPLETE_STEP', step });
-  }
   function saveSystem() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     alert('Your system has been saved! It will be restored on your next visit.');
-  }
-  function getProduct(id: string) {
-    return PRODUCTS.find(p => p.id === id);
   }
   function getTotalQtyForStep(stepIndex: number) {
     // stepIndex is 1-based step id
@@ -126,7 +110,7 @@ export function BundleProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <Ctx.Provider value={{ state, setQty, setVariant, goToStep, completeStep, saveSystem, getProduct, getTotalQtyForStep, getQty, getActiveVariant }}>
+    <Ctx.Provider value={{ state, setQty, setVariant, goToStep, saveSystem, getTotalQtyForStep, getQty, getActiveVariant }}>
       {children}
     </Ctx.Provider>
   );
