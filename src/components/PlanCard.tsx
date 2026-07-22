@@ -32,6 +32,15 @@ export function PlanCard({ product }: Props) {
       className={`flex flex-col h-full cursor-pointer transition-all bg-white border-2 rounded-xl py-6 px-5 hover:border-gray-500 ${isSelected ? 'border-brand' : 'border-card-border'
         }`}
       onClick={handleSelect}
+      role="button"
+      tabIndex={0}
+      aria-pressed={isSelected}
+      onKeyDown={e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleSelect();
+        }
+      }}
     >
       <h3 className="font-plan-title text-gray-900 mb-2">{product.name}</h3>
 
