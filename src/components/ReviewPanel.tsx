@@ -1,7 +1,7 @@
 import { useReviewItems, useOrderTotals, useBundle } from '../context/BundleContext';
 import { ReviewLineItem } from './ReviewLineItem';
 import { FastShippingIcon } from './StepIcons';
-import type { StepCategory } from '../data/products';
+import type { StepCategory } from '../data/steps';
 
 const SECTIONS: { label: string; category: StepCategory }[] = [
   { label: 'Cameras', category: 'cameras' },
