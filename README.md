@@ -82,14 +82,8 @@ Layout is done with Tailwind utility classes directly in JSX. A small set of sco
 - `activeVariants: { [productId]: variantId }`
 - `activeStep: number`
 
-State initializes from `localStorage` (`wyze-bundle-v1`) if present, otherwise from the `INITIAL_*` data, and is persisted back to `localStorage` on every change via `useEffect`.
+State initializes from `localStorage` (`wyze-bundle-v1`) if present, otherwise from the `INITIAL_*` data, and is persisted back to `localStorage` on every change via `useEffect` and if user explicitly clicked "Save my system for late".
 
-Components read/write through the `useBundle()` hook (`setQty`, `setVariant`, `goToStep`, `getQty`, `getActiveVariant`, `getTotalQtyForStep`) — no component touches `PRODUCTS` state directly beyond filtering by category for display.
-
-Derived data is computed from context, not stored:
-
-- `useReviewItems()` walks `PRODUCTS` × `quantities` to build the list of selected line items (product, variant, qty, computed line price).
-- `useOrderTotals()` reduces `useReviewItems()` into `{ totalSale, totalCompare, savings }`, including shipping logic.
-
+Added an extra shipping logic, where users gets a free shipping on oreders above $100 only. And it's a flat fee of $5.99.
 ### Diagram:
 <img src="src/assets/data-flow-diagram.png" width="100%" alt="data-flow-diagram">
