@@ -66,17 +66,6 @@ export function PlanCard({ product }: Props) {
           ))}
         </ul>
       )}
-
-      <button
-        className="font-emphasis text-sm mt-auto flex items-center justify-center gap-1 w-fit bg-brand-primary text-gray-000 border-none rounded px-4 py-2 cursor-pointer transition-colors"
-        onClick={(e) => {
-          e.stopPropagation();
-          handleSelect();
-        }}
-      >
-        <span>Learn more</span>
-        <span className="text-xs font-bold">&gt;</span>
-      </button>
     </div>
   );
 }
