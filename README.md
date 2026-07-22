@@ -1,6 +1,6 @@
 # Wyze Bundle Builder — Documentation (Test ID 43102)
 
-## Quick walkthrough for the submission 😁
+## Quick walkthrough of the submission 😁
 
 <img src="src/assets/thumbnail.jpg" width="400px" alt="video thumbnail"> 
 
